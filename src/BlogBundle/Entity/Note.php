@@ -7,11 +7,12 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Post
  *
- * @ORM\Table(name="post")
- * @ORM\Entity(repositoryClass="BlogBundle\Repository\PostRepository")
+ * @ORM\Table(name="note")
+ * @ORM\Entity(repositoryClass="BlogBundle\Repository\NoteRepository")
  */
-class Post
+class Note
 {
+    
     /**
      * @var int
      *
@@ -41,6 +42,13 @@ class Post
      * @ORM\Column(name="content", type="text")
      */
     private $content;
+    
+    /**
+     * @var bool
+     * 
+     * @ORM\Column(name="public", type="boolean", options={"default":0})
+     */
+    private $public;
 
 
     /**
@@ -123,6 +131,27 @@ class Post
     public function getContent()
     {
         return $this->content;
+    }
+    
+    /**
+     * 
+     * @param bool $public
+     * @return $this
+     */
+    public function setPublic($public)
+    {
+        $this->public = $public;
+        
+        return $this;
+    }
+    
+    /**
+     * 
+     * @return bool
+     */
+    public function isPublic()
+    {
+        return (bool)$this->public;
     }
 }
 

@@ -1,0 +1,25 @@
+{% extends "BlogBundle::layout.html.twig" %}
+
+{% block title %}BlogBundle:Post:index{% endblock %}
+
+{% block body %}    
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          {% if notes is not empty %}
+              {% for note in notes %}
+                {{ include('@Blog/Note/_note.html.twig', { 'note': note }) }}
+              {% endfor %}
+          {% else %}
+            <h2>No content yet!</h2>
+          {% endif %}          
+          <!-- Pager -->
+          <div class="clearfix">
+            <a class="btn btn-secondary float-right" href="#">Older Posts &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+{% endblock %}

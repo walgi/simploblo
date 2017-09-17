@@ -4,17 +4,23 @@ namespace BlogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use BlogBundle\Entity\Note;
 
-class PostController extends Controller
+class NoteController extends Controller
 {
     /**
      * @Route("/")
+     * @Template()
      */
     public function indexAction()
     {
-        return $this->render('BlogBundle:Post:index.html.twig', array(
-            // ...
-        ));
+        $repository = $this->getDoctrine()->getRepository(Note::class);
+        $notes = $repository->getNotesForHomepage();
+                
+        return [
+            'notes' => $notes,
+        ];
     }
 
     /**
